@@ -7,58 +7,63 @@
 
 <style>
 body{
-  margin:0;
-  background:#111;
-  color:white;
-  font-family:Arial;
+margin:0;
+background:#111;
+color:white;
+font-family:Arial;
 }
 header{
-  background:#222;
-  padding:25px;
-  text-align:center;
+background:#222;
+padding:25px;
+text-align:center;
 }
-h1{
-  color:red;
-}
+h1{color:red}
 input{
-  width:90%;
-  max-width:500px;
-  padding:14px;
-  border-radius:25px;
-  border:0;
-  font-size:16px;
+width:90%;
+max-width:500px;
+padding:14px;
+border-radius:25px;
+border:0;
+font-size:16px;
 }
-.container{
-  padding:20px;
-}
+.container{padding:20px}
 .movies{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
 }
 .movie{
-  background:#222;
-  border-radius:10px;
-  overflow:hidden;
-  padding-bottom:15px;
+background:#222;
+border-radius:10px;
+overflow:hidden;
+padding-bottom:15px;
 }
 .poster{
-  height:180px;
-  background:#500;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:60px;
+height:180px;
+background:#500;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:60px;
 }
-.info{
-  padding:10px;
-}
+.info{padding:10px}
 button{
-  background:red;
-  color:white;
-  border:0;
-  padding:10px 15px;
-  border-radius:5px;
+background:red;
+color:white;
+border:0;
+padding:10px 15px;
+border-radius:5px;
+font-size:15px;
+}
+#details{
+display:none;
+padding:25px;
+background:#181818;
+min-height:400px;
+}
+.back{
+background:#555;
+margin-bottom:20px;
 }
 </style>
 </head>
@@ -71,16 +76,17 @@ button{
 </header>
 
 <div class="container">
+
 <h2>Latest Movies</h2>
 
-<div class="movies">
+<div class="movies" id="movies">
 
 <div class="movie">
 <div class="poster">🎬</div>
 <div class="info">
 <h3>Movie Name 1</h3>
 <p>2026 • HD</p>
-<button>Watch Now</button>
+<button onclick="openMovie('Movie Name 1')">Watch Now</button>
 </div>
 </div>
 
@@ -89,7 +95,7 @@ button{
 <div class="info">
 <h3>Movie Name 2</h3>
 <p>2026 • HD</p>
-<button>Watch Now</button>
+<button onclick="openMovie('Movie Name 2')">Watch Now</button>
 </div>
 </div>
 
@@ -98,7 +104,7 @@ button{
 <div class="info">
 <h3>Movie Name 3</h3>
 <p>2026 • HD</p>
-<button>Watch Now</button>
+<button onclick="openMovie('Movie Name 3')">Watch Now</button>
 </div>
 </div>
 
@@ -107,12 +113,61 @@ button{
 <div class="info">
 <h3>Movie Name 4</h3>
 <p>2026 • HD</p>
-<button>Watch Now</button>
+<button onclick="openMovie('Movie Name 4')">Watch Now</button>
 </div>
 </div>
 
 </div>
 </div>
+
+<div id="details">
+<button class="back" onclick="goBack()">← Back</button>
+
+<h1 id="movieTitle">Movie Name</h1>
+
+<div style="font-size:100px;text-align:center;">🎬</div>
+
+<p>2026 • HD</p>
+<p>Movie Details</p>
+
+<button onclick="alert('Add your own or licensed movie video here.')">
+▶ Play Movie
+</button>
+
+</div>
+
+<script>
+
+function openMovie(name){
+document.querySelector(".container").style.display="none";
+document.getElementById("details").style.display="block";
+document.getElementById("movieTitle").innerText=name;
+window.scrollTo(0,0);
+}
+
+function goBack(){
+document.getElementById("details").style.display="none";
+document.querySelector(".container").style.display="block";
+}
+
+document.getElementById("search").addEventListener("input",function(){
+
+let text=this.value.toLowerCase();
+let cards=document.querySelectorAll(".movie");
+
+cards.forEach(function(card){
+let name=card.querySelector("h3").innerText.toLowerCase();
+
+if(name.includes(text)){
+card.style.display="block";
+}else{
+card.style.display="none";
+}
+});
+
+});
+
+</script>
 
 </body>
 </html>
