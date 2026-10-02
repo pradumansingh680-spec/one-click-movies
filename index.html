@@ -1,218 +1,562 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>One Click Movies</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>One Click Movies - Meme Baby</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+}
+
 body{
 margin:0;
 background:#111;
 color:white;
-font-family:Arial;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 header{
 background:#222;
-padding:25px;
+padding:25px 15px;
 text-align:center;
 }
 
-h1{
+.logo{
+font-size:32px;
+font-weight:bold;
 color:red;
+margin-bottom:20px;
 }
 
-input{
+.search{
 width:90%;
-max-width:500px;
-padding:14px;
-border-radius:25px;
-border:0;
-font-size:16px;
+max-width:550px;
+padding:15px 20px;
+border:none;
+border-radius:30px;
+font-size:17px;
+outline:none;
 }
 
 .container{
-padding:20px;
+max-width:1200px;
+margin:auto;
+padding:25px;
+}
+
+.section-title{
+font-size:30px;
+margin-bottom:25px;
 }
 
 .movies{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
 }
 
 .movie{
 background:#222;
-border-radius:10px;
+border-radius:12px;
 overflow:hidden;
-padding-bottom:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.4);
 }
 
 .poster{
-height:180px;
+width:100%;
+height:300px;
 background:#500;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:60px;
+}
+
+.poster img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
 }
 
 .info{
-padding:10px;
+padding:15px;
 }
 
-button{
+.info h3{
+margin:0 0 10px;
+font-size:20px;
+}
+
+.info p{
+color:#ccc;
+margin:0 0 15px;
+}
+
+.watch{
 background:red;
 color:white;
-border:0;
-padding:10px 15px;
-border-radius:5px;
-font-size:15px;
+border:none;
+padding:12px 18px;
+border-radius:6px;
+font-size:16px;
 cursor:pointer;
+}
+
+.watch:hover{
+background:#cc0000;
 }
 
 #details{
 display:none;
+max-width:1100px;
+margin:auto;
 padding:25px;
-}
-
-video{
-width:100%;
-max-width:900px;
-display:block;
-margin:20px auto;
-background:black;
-border-radius:10px;
 }
 
 .back{
 background:#555;
+color:white;
+border:none;
+padding:11px 18px;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+margin-bottom:25px;
+}
+
+.movie-title{
+color:red;
+font-size:36px;
+margin:10px 0;
+}
+
+.movie-meta{
+color:#ccc;
+font-size:18px;
 margin-bottom:20px;
 }
 
-@media(max-width:600px){
+.player{
+width:100%;
+background:#000;
+border-radius:10px;
+overflow:hidden;
+}
+
+.player video{
+width:100%;
+display:block;
+max-height:650px;
+}
+
+.description{
+background:#222;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+}
+
+.description h2{
+margin-top:0;
+}
+
+footer{
+text-align:center;
+padding:30px 15px;
+color:#888;
+margin-top:30px;
+}
+
+/* Tablet */
+
+@media(max-width:900px){
+
 .movies{
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(2,1fr);
 }
+
+.poster{
+height:280px;
 }
+
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.logo{
+font-size:25px;
+}
+
+.container{
+padding:15px;
+}
+
+.section-title{
+font-size:25px;
+}
+
+.movies{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.poster{
+height:220px;
+}
+
+.info{
+padding:12px;
+}
+
+.info h3{
+font-size:17px;
+}
+
+.info p{
+font-size:14px;
+}
+
+.watch{
+width:100%;
+font-size:14px;
+padding:10px 5px;
+}
+
+#details{
+padding:15px;
+}
+
+.movie-title{
+font-size:28px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
-<h1>🎬 ONE CLICK MOVIES</h1>
-<input id="search" placeholder="Search movies...">
+
+<div class="logo">
+🎬 ONE CLICK MOVIES
+</div>
+
+<input
+class="search"
+id="search"
+type="text"
+placeholder="Search movies..."
+>
+
 </header>
+
+
+<!-- HOME PAGE -->
 
 <div class="container" id="home">
 
-<h2>Latest Movies</h2>
+<h2 class="section-title">
+Latest Movies
+</h2>
 
-<div class="movies">
+
+<div class="movies" id="movieList">
+
+
+<!-- MEME BABY -->
 
 <div class="movie">
-<div class="poster">🎬</div>
+
+<div class="poster">
+
+<img
+src="meme-baby-poster.png"
+alt="Meme Baby Poster"
+>
+
+</div>
+
 <div class="info">
-<h3>My Test Movie</h3>
+
+<h3>MEME BABY</h3>
+
 <p>2026 • HD</p>
-<button onclick="openMovie('My Test Movie')">
-Watch Now
+
+<button
+class="watch"
+onclick="openMovie()"
+>
+▶ Watch Now
 </button>
-</div>
+
 </div>
 
+</div>
+
+
+<!-- DEMO MOVIES -->
+
 <div class="movie">
-<div class="poster">🍿</div>
+
+<div class="poster"
+style="display:flex;
+align-items:center;
+justify-content:center;
+font-size:70px;">
+🍿
+</div>
+
 <div class="info">
+
 <h3>Movie Name 2</h3>
+
 <p>2026 • HD</p>
-<button onclick="openMovie('Movie Name 2')">
-Watch Now
+
+<button
+class="watch"
+onclick="showDemo()"
+>
+▶ Watch Now
 </button>
-</div>
+
 </div>
 
+</div>
+
+
 <div class="movie">
-<div class="poster">🎥</div>
+
+<div class="poster"
+style="display:flex;
+align-items:center;
+justify-content:center;
+font-size:70px;">
+🎥
+</div>
+
 <div class="info">
+
 <h3>Movie Name 3</h3>
+
 <p>2026 • HD</p>
-<button onclick="openMovie('Movie Name 3')">
-Watch Now
+
+<button
+class="watch"
+onclick="showDemo()"
+>
+▶ Watch Now
 </button>
+
 </div>
+
 </div>
+
 
 <div class="movie">
-<div class="poster">⭐</div>
-<div class="info">
-<h3>Movie Name 4</h3>
-<p>2026 • HD</p>
-<button onclick="openMovie('Movie Name 4')">
-Watch Now
-</button>
+
+<div class="poster"
+style="display:flex;
+align-items:center;
+justify-content:center;
+font-size:70px;">
+⭐
 </div>
+
+<div class="info">
+
+<h3>Movie Name 4</h3>
+
+<p>2026 • HD</p>
+
+<button
+class="watch"
+onclick="showDemo()"
+>
+▶ Watch Now
+</button>
+
 </div>
 
 </div>
+
+
 </div>
+
+</div>
+
+
+<!-- MOVIE DETAILS -->
 
 <div id="details">
 
-<button class="back" onclick="goBack()">← Back</button>
+<button
+class="back"
+onclick="goBack()"
+>
+← Back
+</button>
 
-<h1 id="movieTitle">My Test Movie</h1>
 
-<p>2026 • HD</p>
+<h1 class="movie-title">
+MEME BABY
+</h1>
 
-<video controls>
-<source src="gemini_generated_video_3467fbb3.mp4" type="video/mp4">
+<div class="movie-meta">
+2026 • HD
+</div>
+
+
+<!-- VIDEO PLAYER -->
+
+<div class="player">
+
+<video
+id="movieVideo"
+controls
+playsinline
+poster="meme-baby-poster.png"
+>
+
+<source
+src="gemini_generated_video_3467fbb3.mp4"
+type="video/mp4"
+>
+
 Your browser does not support video playback.
+
 </video>
 
-<h2>Movie Details</h2>
+</div>
+
+
+<!-- DESCRIPTION -->
+
+<div class="description">
+
+<h2>
+🎬 Movie Details
+</h2>
+
 <p>
-This is a test movie page for One Click Movies.
+<strong>Movie:</strong> MEME BABY
+</p>
+
+<p>
+<strong>Year:</strong> 2026
+</p>
+
+<p>
+<strong>Quality:</strong> HD
+</p>
+
+<p>
+Welcome to One Click Movies.
+Enjoy the video.
 </p>
 
 </div>
 
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+© 2026 One Click Movies
+
+</footer>
+
+
 <script>
 
-function openMovie(name){
+
+/* OPEN MOVIE */
+
+function openMovie(){
+
 document.getElementById("home").style.display="none";
+
 document.getElementById("details").style.display="block";
-document.getElementById("movieTitle").innerText=name;
+
 window.scrollTo(0,0);
+
 }
+
+
+/* BACK BUTTON */
 
 function goBack(){
+
+let video=document.getElementById("movieVideo");
+
+video.pause();
+
 document.getElementById("details").style.display="none";
+
 document.getElementById("home").style.display="block";
+
+window.scrollTo(0,0);
+
 }
 
-document.getElementById("search").addEventListener("input",function(){
 
-let text=this.value.toLowerCase();
-let cards=document.querySelectorAll(".movie");
+/* DEMO BUTTON */
 
-cards.forEach(function(card){
+function showDemo(){
 
-let name=card.querySelector("h3").innerText.toLowerCase();
+alert("This movie is not available yet.");
 
-if(name.includes(text)){
-card.style.display="block";
+}
+
+
+/* SEARCH */
+
+document.getElementById("search").addEventListener(
+"input",
+function(){
+
+let searchText=this.value.toLowerCase();
+
+let movies=document.querySelectorAll(".movie");
+
+movies.forEach(function(movie){
+
+let title=movie
+.querySelector("h3")
+.innerText
+.toLowerCase();
+
+if(title.includes(searchText)){
+
+movie.style.display="block";
+
 }else{
-card.style.display="none";
+
+movie.style.display="none";
+
 }
 
 });
 
 });
+
 
 </script>
+
 
 </body>
 </html>
