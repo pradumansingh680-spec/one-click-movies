@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>One Click Movies - Meme Baby</title>
+<title>One Click Movies</title>
 
 <style>
 
@@ -22,8 +23,10 @@ color:white;
 font-family:Arial,Helvetica,sans-serif;
 }
 
+/* HEADER */
+
 header{
-background:#222;
+background:#202020;
 padding:25px 15px;
 text-align:center;
 }
@@ -39,11 +42,38 @@ margin-bottom:20px;
 width:90%;
 max-width:550px;
 padding:15px 20px;
-border:none;
+border:0;
 border-radius:30px;
 font-size:17px;
 outline:none;
 }
+
+/* CATEGORIES */
+
+.categories{
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+padding:20px 15px;
+background:#181818;
+}
+
+.category{
+background:#333;
+color:white;
+border:0;
+padding:10px 18px;
+border-radius:20px;
+cursor:pointer;
+font-size:15px;
+}
+
+.category.active{
+background:red;
+}
+
+/* HOME */
 
 .container{
 max-width:1200px;
@@ -55,6 +85,8 @@ padding:25px;
 font-size:30px;
 margin-bottom:25px;
 }
+
+/* MOVIES */
 
 .movies{
 display:grid;
@@ -73,6 +105,10 @@ box-shadow:0 5px 20px rgba(0,0,0,.4);
 width:100%;
 height:300px;
 background:#500;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:70px;
 }
 
 .poster img{
@@ -96,19 +132,32 @@ color:#ccc;
 margin:0 0 15px;
 }
 
+.tag{
+display:inline-block;
+font-size:12px;
+background:#444;
+padding:5px 8px;
+border-radius:4px;
+margin-bottom:12px;
+}
+
 .watch{
+display:block;
 background:red;
 color:white;
-border:none;
+border:0;
 padding:12px 18px;
 border-radius:6px;
 font-size:16px;
 cursor:pointer;
+width:100%;
 }
 
 .watch:hover{
-background:#cc0000;
+background:#d00000;
 }
+
+/* DETAILS */
 
 #details{
 display:none;
@@ -120,7 +169,7 @@ padding:25px;
 .back{
 background:#555;
 color:white;
-border:none;
+border:0;
 padding:11px 18px;
 border-radius:6px;
 font-size:16px;
@@ -164,6 +213,8 @@ border-radius:10px;
 margin-top:0;
 }
 
+/* FOOTER */
+
 footer{
 text-align:center;
 padding:30px 15px;
@@ -171,7 +222,7 @@ color:#888;
 margin-top:30px;
 }
 
-/* Tablet */
+/* TABLET */
 
 @media(max-width:900px){
 
@@ -185,7 +236,7 @@ height:280px;
 
 }
 
-/* Mobile */
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -223,7 +274,6 @@ font-size:14px;
 }
 
 .watch{
-width:100%;
 font-size:14px;
 padding:10px 5px;
 }
@@ -236,11 +286,17 @@ padding:15px;
 font-size:28px;
 }
 
+.category{
+font-size:13px;
+padding:9px 13px;
+}
+
 }
 
 </style>
 
 </head>
+
 
 <body>
 
@@ -263,7 +319,49 @@ placeholder="Search movies..."
 </header>
 
 
-<!-- HOME PAGE -->
+<!-- CATEGORIES -->
+
+<div class="categories">
+
+<button
+class="category active"
+onclick="filterCategory('All',this)"
+>
+All
+</button>
+
+<button
+class="category"
+onclick="filterCategory('Bollywood',this)"
+>
+Bollywood
+</button>
+
+<button
+class="category"
+onclick="filterCategory('Hollywood',this)"
+>
+Hollywood
+</button>
+
+<button
+class="category"
+onclick="filterCategory('South',this)"
+>
+South
+</button>
+
+<button
+class="category"
+onclick="filterCategory('Web Series',this)"
+>
+Web Series
+</button>
+
+</div>
+
+
+<!-- HOME -->
 
 <div class="container" id="home">
 
@@ -277,7 +375,8 @@ Latest Movies
 
 <!-- MEME BABY -->
 
-<div class="movie">
+<div class="movie"
+data-category="Bollywood">
 
 <div class="poster">
 
@@ -291,6 +390,10 @@ alt="Meme Baby Poster"
 <div class="info">
 
 <h3>MEME BABY</h3>
+
+<span class="tag">
+Bollywood
+</span>
 
 <p>2026 • HD</p>
 
@@ -306,15 +409,12 @@ onclick="openMovie()"
 </div>
 
 
-<!-- DEMO MOVIES -->
+<!-- DEMO MOVIE 2 -->
 
-<div class="movie">
+<div class="movie"
+data-category="Hollywood">
 
-<div class="poster"
-style="display:flex;
-align-items:center;
-justify-content:center;
-font-size:70px;">
+<div class="poster">
 🍿
 </div>
 
@@ -322,6 +422,10 @@ font-size:70px;">
 
 <h3>Movie Name 2</h3>
 
+<span class="tag">
+Hollywood
+</span>
+
 <p>2026 • HD</p>
 
 <button
@@ -336,13 +440,12 @@ onclick="showDemo()"
 </div>
 
 
-<div class="movie">
+<!-- DEMO MOVIE 3 -->
 
-<div class="poster"
-style="display:flex;
-align-items:center;
-justify-content:center;
-font-size:70px;">
+<div class="movie"
+data-category="South">
+
+<div class="poster">
 🎥
 </div>
 
@@ -350,6 +453,10 @@ font-size:70px;">
 
 <h3>Movie Name 3</h3>
 
+<span class="tag">
+South
+</span>
+
 <p>2026 • HD</p>
 
 <button
@@ -364,19 +471,22 @@ onclick="showDemo()"
 </div>
 
 
-<div class="movie">
+<!-- DEMO MOVIE 4 -->
 
-<div class="poster"
-style="display:flex;
-align-items:center;
-justify-content:center;
-font-size:70px;">
+<div class="movie"
+data-category="Web Series">
+
+<div class="poster">
 ⭐
 </div>
 
 <div class="info">
 
 <h3>Movie Name 4</h3>
+
+<span class="tag">
+Web Series
+</span>
 
 <p>2026 • HD</p>
 
@@ -414,11 +524,11 @@ MEME BABY
 </h1>
 
 <div class="movie-meta">
-2026 • HD
+2026 • HD • Bollywood
 </div>
 
 
-<!-- VIDEO PLAYER -->
+<!-- VIDEO -->
 
 <div class="player">
 
@@ -441,7 +551,7 @@ Your browser does not support video playback.
 </div>
 
 
-<!-- DESCRIPTION -->
+<!-- DETAILS -->
 
 <div class="description">
 
@@ -462,17 +572,18 @@ Your browser does not support video playback.
 </p>
 
 <p>
+<strong>Category:</strong> Bollywood
+</p>
+
+<p>
 Welcome to One Click Movies.
 Enjoy the video.
 </p>
 
 </div>
 
-
 </div>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -482,7 +593,6 @@ Enjoy the video.
 
 
 <script>
-
 
 /* OPEN MOVIE */
 
@@ -497,7 +607,7 @@ window.scrollTo(0,0);
 }
 
 
-/* BACK BUTTON */
+/* BACK */
 
 function goBack(){
 
@@ -514,7 +624,7 @@ window.scrollTo(0,0);
 }
 
 
-/* DEMO BUTTON */
+/* DEMO */
 
 function showDemo(){
 
@@ -523,11 +633,52 @@ alert("This movie is not available yet.");
 }
 
 
+/* CATEGORY FILTER */
+
+function filterCategory(category,button){
+
+let movies=document.querySelectorAll(".movie");
+
+let buttons=document.querySelectorAll(".category");
+
+buttons.forEach(function(btn){
+
+btn.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+
+movies.forEach(function(movie){
+
+if(category==="All"){
+
+movie.style.display="block";
+
+}
+
+else if(movie.dataset.category===category){
+
+movie.style.display="block";
+
+}
+
+else{
+
+movie.style.display="none";
+
+}
+
+});
+
+}
+
+
 /* SEARCH */
 
-document.getElementById("search").addEventListener(
-"input",
-function(){
+document.getElementById("search")
+.addEventListener("input",function(){
 
 let searchText=this.value.toLowerCase();
 
@@ -544,7 +695,9 @@ if(title.includes(searchText)){
 
 movie.style.display="block";
 
-}else{
+}
+
+else{
 
 movie.style.display="none";
 
@@ -554,9 +707,9 @@ movie.style.display="none";
 
 });
 
-
 </script>
 
 
 </body>
+
 </html>
